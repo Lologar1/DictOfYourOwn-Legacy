@@ -22,9 +22,13 @@ public class DictUtils {
             System.err.println("File " + file.getFileName() + " doesn't exist !");
             return;
         }
-        String key = file.getFileName().toString().strip().split("\\.")[0];
+        String key = file.getFileName().toString().strip().split("\\.")[0].toLowerCase();
         System.out.println("Importing file under key " + key);
         List<String> lines = Files.readAllLines(file);
+        if (lines.isEmpty()) {
+            System.out.println("File " + key + " is empty ! Aborting.");
+            return;
+        }
         String[] wordTags = lines.removeFirst().split(", ");
         System.out.println("Adding to tags : " + Arrays.toString(wordTags));
 
